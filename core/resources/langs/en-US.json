@@ -29,5 +29,9 @@
     "noData": "No TODOs yet!",
     "todoList": "Todo",
     "completedList": "Completed"
+  },
+  "createTodo": {
+    "hintText": "Add your todo here...",
+    "button": "Save"
   }
 }

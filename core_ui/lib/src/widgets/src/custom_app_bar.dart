@@ -9,7 +9,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final bool isShowBackButton;
   final bool automaticallyImplyLeading;
-  final double? leadingWidth;
   final Widget? leading;
   final List<Widget>? actions;
 
@@ -18,11 +17,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.isShowBackButton = true,
     this.automaticallyImplyLeading = true,
-    this.leadingWidth,
     this.leading,
     this.actions,
     super.key,
   });
+
+  static const double backIconSize = AppDimens.iconSizeMedium;
+  static const double backIconPadding = AppDimens.iconPadding;
+  static const double leftLeadingPadding = AppDimens.appPagesPadding;
+  static const double leadingWidth = backIconSize + backIconPadding + leftLeadingPadding;
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -35,19 +38,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: false,
       surfaceTintColor: colors.background,
       backgroundColor: colors.background,
-      leadingWidth: leadingWidth ?? 0,
+      leadingWidth: isShowBackButton ? leadingWidth : leftLeadingPadding,
       automaticallyImplyLeading: automaticallyImplyLeading,
       title: Text(title ?? ''),
-      leading: leading ??
-          (isShowBackButton
-              ? AppIcons.arrowLeft(
-                  padding: const EdgeInsets.all(AppDimens.iconPadding),
-                  size: AppDimens.contentPaddingVertical,
-                  onTap: () {
-                    appLocator.get<AppNavigator>().pop();
-                  },
-                )
-              : const SizedBox.shrink()),
+      leading: Padding(
+        padding: const EdgeInsets.only(left: leftLeadingPadding),
+        child: leading ??
+            (isShowBackButton
+                ? AppIcons.arrowLeft(
+                    padding: const EdgeInsets.all(backIconPadding),
+                    size: backIconSize,
+                    onTap: () {
+                      appLocator.get<AppNavigator>().pop();
+                    },
+                  )
+                : const SizedBox.shrink()),
+      ),
       actions: actions,
     );
   }

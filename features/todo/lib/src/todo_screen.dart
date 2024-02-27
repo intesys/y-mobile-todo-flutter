@@ -15,7 +15,6 @@ class TodoScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        leadingWidth: AppDimens.appPagesPadding,
         title: LocaleKeys.todo_pageName.tr(),
         isShowBackButton: false,
         actions: <Widget>[
@@ -35,15 +34,18 @@ class TodoScreen extends StatelessWidget {
         ],
       ),
       body: EmptyState(),
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          color: colors.accent,
-          shape: BoxShape.circle,
-        ),
-        child: AppIcons.plus(
-          size: AppDimens.iconSizeMedium,
-          color: colors.buttonContent,
-          padding: const EdgeInsets.all(AppDimens.iconPadding),
+      floatingActionButton: GestureDetector(
+        onTap: appNavigator.pushToCreateTodoScreen,
+        child: Container(
+          decoration: BoxDecoration(
+            color: colors.accent,
+            shape: BoxShape.circle,
+          ),
+          child: AppIcons.plus(
+            size: AppDimens.iconSizeMedium,
+            color: colors.buttonContent,
+            padding: const EdgeInsets.all(AppDimens.iconPadding),
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
