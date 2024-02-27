@@ -10,6 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  core:
+    path: ../core
+  navigation:
+    path: ../navigation
+
   flutter_svg: ^2.0.10+1
 
 dev_dependencies:

@@ -16,6 +16,7 @@ class AppIcon {
     Color? color,
     double? size,
     BoxFit? fit,
+    EdgeInsets? padding,
     Function()? onTap,
   }) {
     assert(
@@ -26,18 +27,21 @@ class AppIcon {
     return InkWell(
       borderRadius: BorderRadius.circular(size ?? 0.0),
       onTap: onTap,
-      child: SvgPicture.asset(
-        iconKey,
-        package: AppIcons.packageName,
-        colorFilter: color != null
-            ? ColorFilter.mode(
-                color,
-                BlendMode.srcIn,
-              )
-            : null,
-        fit: fit ?? BoxFit.contain,
-        height: size,
-        width: size,
+      child: Padding(
+        padding: padding ?? EdgeInsets.zero,
+        child: SvgPicture.asset(
+          iconKey,
+          package: AppIcons.packageName,
+          colorFilter: color != null
+              ? ColorFilter.mode(
+                  color,
+                  BlendMode.srcIn,
+                )
+              : null,
+          fit: fit ?? BoxFit.contain,
+          height: size,
+          width: size,
+        ),
       ),
     );
   }

@@ -77,7 +77,7 @@ class AuthScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       AppButton(
                         title: LocaleKeys.auth_continueButton.tr(),
-                        onTap: () {},
+                        onTap: appNavigator.pushToTodoScreen,
                       ),
                       const SizedBox(height: 24),
                       AppRichText(

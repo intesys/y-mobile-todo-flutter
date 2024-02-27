@@ -2,7 +2,7 @@ import 'package:auth/auth.dart';
 import 'package:create_todo/create_todo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo/todo_screen.dart';
+import 'package:todo/todo.dart';
 
 class AppNavigator {
   static const String _authPath = '/';

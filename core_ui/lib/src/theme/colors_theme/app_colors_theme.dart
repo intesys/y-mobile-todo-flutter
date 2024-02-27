@@ -26,4 +26,6 @@ abstract class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   Color get textInputBackground;
 
   Color get buttonContent;
+
+  Color get listTileBackground;
 }

@@ -23,5 +23,11 @@
     "charactersCount": "At least 12 characters",
     "upperAndLower": "At least one upper or lower case",
     "specialCharacter": "At least one special character"
+  },
+  "todo": {
+    "pageName": "Todo",
+    "noData": "No TODOs yet!",
+    "todoList": "Todo",
+    "completedList": "Completed"
   }
 }

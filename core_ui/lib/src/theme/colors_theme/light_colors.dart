@@ -42,6 +42,9 @@ class LightColorsTheme extends AppColorsTheme {
   Color get buttonContent => AppColors.babyPowder;
 
   @override
+  Color get listTileBackground => AppColors.seashell;
+
+  @override
   ThemeExtension<AppColorsTheme> copyWith() {
     return this;
   }
