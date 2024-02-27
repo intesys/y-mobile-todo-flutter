@@ -7,6 +7,7 @@ class AppDimens {
 
   static const double appPagesPadding = 16.0;
   static const double appBigPagesPadding = 36.0;
+  static const double floatingButtonAppPadding = 100.0;
 
   static const double contentBigPaddingVertical = 16.0;
   static const double contentBigPaddingHorizontal = 16.0;
@@ -16,6 +17,8 @@ class AppDimens {
   static const double iconExtraSmallPadding = 6.0;
   static const double iconSmallPadding = 8.0;
   static const double iconPadding = 16.0;
+
+  static const double imageSize = 120.0;
 
   static const double textInputContentPaddingVertical = 16.0;
   static const double textInputContentPaddingHorizontal = 36.0;
