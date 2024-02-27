@@ -1,9 +1,19 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await EasyLocalization.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   navigationDI.setupDependencies();
 
   runApp(const MyApp());
@@ -14,9 +24,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: lightTheme,
-      routerConfig: appLocator.get<AppNavigator>().appRouter,
+    return EasyLocalization(
+      supportedLocales: AppLocalization.supportedLocales,
+      path: AppLocalization.langsFolderPath,
+      fallbackLocale: AppLocalization.fallbackLocale,
+      child: Builder(
+        builder: (BuildContext context) {
+          return MaterialApp.router(
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            routerConfig: appLocator.get<AppNavigator>().appRouter,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            builder: (BuildContext context, Widget? child) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: TextScaler.noScaling,
+                ),
+                child: child ?? const SizedBox(),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

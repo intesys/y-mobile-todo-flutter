@@ -24,14 +24,14 @@ class AuthScreen extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        'EastTrials',
+                        LocaleKeys.common_appTitle.tr(),
                         style: AppFonts.raleway36Bold.copyWith(
                           color: colors.title,
                         ),
                       ),
                       const SizedBox(height: 36),
-                      const Text(
-                        'Your Participation ID',
+                      Text(
+                        LocaleKeys.auth_participationID.tr(),
                         style: AppFonts.raleway24SemiBold,
                       ),
                       Text(
@@ -41,7 +41,9 @@ class AuthScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const SuccessMessage(message: 'Your phone number is verified!'),
+                      SuccessMessage(
+                        message: LocaleKeys.auth_phoneNumberVerified.tr(),
+                      ),
                       const SizedBox(height: 36),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -49,7 +51,7 @@ class AuthScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              'Create a password',
+                              LocaleKeys.auth_createPassword.tr(),
                               style: AppFonts.raleway24SemiBold.copyWith(
                                 color: colors.title,
                               ),
@@ -63,24 +65,24 @@ class AuthScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 36),
-                      const AppTextFormField(
-                        hintText: 'Enter password',
+                      AppTextFormField(
+                        hintText: LocaleKeys.auth_enterPasswordHint.tr(),
                         obscureText: true,
                       ),
                       const SizedBox(height: 16),
-                      const AppTextFormField(
-                        hintText: 'Confirm password',
+                      AppTextFormField(
+                        hintText: LocaleKeys.auth_confirmPasswordHint.tr(),
                         obscureText: true,
                       ),
                       const SizedBox(height: 24),
                       AppButton(
-                        title: 'Continue',
+                        title: LocaleKeys.auth_continueButton.tr(),
                         onTap: () {},
                       ),
                       const SizedBox(height: 24),
                       AppRichText(
-                        text: 'Use different',
-                        tapText: 'Participation ID',
+                        text: LocaleKeys.auth_changeParticipationID_text.tr(),
+                        tapText: LocaleKeys.auth_changeParticipationID_tapText.tr(),
                         onTap: () {},
                       ),
                     ],
@@ -91,8 +93,8 @@ class AuthScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(AppDimens.appPagesPadding),
               child: AppRichText(
-                text: 'By clicking continue, you agree to the',
-                tapText: '\nEnd user licence agreement',
+                text: LocaleKeys.auth_licenceAgreement_text.tr(),
+                tapText: LocaleKeys.auth_licenceAgreement_tapText.tr(),
                 onTap: () {},
               ),
             )

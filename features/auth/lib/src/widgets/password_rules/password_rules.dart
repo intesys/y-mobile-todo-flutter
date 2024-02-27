@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,20 +9,20 @@ class PasswordRules extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text('Password must contain:'),
-        SizedBox(height: 8),
+        Text(LocaleKeys.passwordRules_title.tr()),
+        const SizedBox(height: 8),
         PasswordRulesItem(
-          rule: 'At least 12 characters',
+          rule: LocaleKeys.passwordRules_charactersCount.tr(),
         ),
         PasswordRulesItem(
-          rule: 'At least one upper or lower case',
+          rule: LocaleKeys.passwordRules_upperAndLower.tr(),
         ),
         PasswordRulesItem(
-          rule: 'At least one special character',
+          rule: LocaleKeys.passwordRules_specialCharacter.tr(),
         ),
       ],
     );

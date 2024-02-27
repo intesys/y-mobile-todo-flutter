@@ -1,3 +1,7 @@
 library core;
 
+export 'package:easy_localization/easy_localization.dart';
+
 export 'src/di/app_di.dart';
+export 'src/localization/app_localization.dart';
+export 'src/localization/generated/locale_keys.g.dart';

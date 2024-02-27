@@ -1,0 +1,27 @@
+{
+  "common": {
+    "appTitle": "EasyTrials"
+  },
+  "auth": {
+    "participationID": "Your Participation ID",
+    "phoneNumberVerified": "Your phone number is verified!",
+    "createPassword": "Create a password",
+    "enterPasswordHint": "Enter password",
+    "confirmPasswordHint": "Confirm password",
+    "continueButton": "Continue",
+    "changeParticipationID": {
+      "text": "Use different",
+      "tapText": "Participation ID"
+    },
+    "licenceAgreement": {
+      "text": "By clicking continue, you agree to the",
+      "tapText": "\nEnd user licence agreement"
+    }
+  },
+  "passwordRules": {
+    "title": "Password must contain:",
+    "charactersCount": "At least 12 characters",
+    "upperAndLower": "At least one upper or lower case",
+    "specialCharacter": "At least one special character"
+  }
+}
