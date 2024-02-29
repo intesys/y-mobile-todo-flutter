@@ -1,20 +1,12 @@
+library data_di;
+
 import 'package:core/core.dart';
+import 'package:domain/domain.dart';
 
 import '../api/api_privider.dart';
 import '../api/helpers/error_handler.dart';
-import 'todo_di.dart';
+import '../providers/todo_provider.dart';
+import '../repository/todo_repository_impl.dart';
 
-final _DataDI dataDI = _DataDI();
-
-class _DataDI {
-  Future<void> initDependencies() async {
-    _initApi();
-    initTodoDependencies();
-  }
-
-  void _initApi() {
-    appLocator.registerLazySingleton<ApiProvider>(
-      () => ApiProvider(errorHandler: ErrorHandler()),
-    );
-  }
-}
+part 'src/api_di.dart';
+part 'src/todo_di.dart';

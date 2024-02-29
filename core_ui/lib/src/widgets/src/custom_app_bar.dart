@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 
@@ -48,9 +47,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ? AppIcons.arrowLeft(
                     padding: const EdgeInsets.all(backIconPadding),
                     size: backIconSize,
-                    onTap: () {
-                      appLocator.get<AppNavigator>().pop();
-                    },
+                    onTap: AppNavigator.pop,
                   )
                 : const SizedBox.shrink()),
       ),

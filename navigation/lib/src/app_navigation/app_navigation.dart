@@ -9,9 +9,9 @@ class AppNavigator {
   static const String _todoPath = '/todo';
   static const String _createTodoPath = '/create_todo';
 
-  GoRouter get appRouter => _router;
+  static GoRouter get appRouter => _router;
 
-  final GoRouter _router = GoRouter(
+  static final GoRouter _router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
         path: _authPath,
@@ -34,19 +34,19 @@ class AppNavigator {
     ],
   );
 
-  void pop() {
-    _router.pop();
+  static void pop([dynamic value]) {
+    _router.pop(value);
   }
 
-  void pushToTodoScreen() {
+  static void pushToTodoScreen() {
     _router.push(_todoPath);
   }
 
-  void pushToAuthScreen() {
+  static void pushToAuthScreen() {
     _router.push(_authPath);
   }
 
-  void pushToCreateTodoScreen() {
-    _router.push(_createTodoPath);
+  static Future<void> pushToCreateTodoScreen() async {
+    await _router.push(_createTodoPath);
   }
 }

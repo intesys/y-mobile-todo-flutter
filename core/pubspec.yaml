@@ -9,10 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  get_it: ^7.6.7
+    
   easy_localization: ^3.0.4
   equatable: ^2.0.5
+  state_notifier: ^1.0.0
+  flutter_riverpod: ^2.4.10
 
 dev_dependencies:
   flutter_test:

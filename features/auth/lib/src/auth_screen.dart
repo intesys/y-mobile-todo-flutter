@@ -7,7 +7,6 @@ import 'widgets/password_rules/password_rules.dart';
 import 'widgets/success_message.dart';
 
 class AuthScreen extends StatelessWidget {
-  final AppNavigator appNavigator = appLocator.get<AppNavigator>();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,7 @@ class AuthScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       AppButton(
                         title: LocaleKeys.auth_continueButton.tr(),
-                        onTap: appNavigator.pushToTodoScreen,
+                        onTap: AppNavigator.pushToTodoScreen,
                       ),
                       const SizedBox(height: 24),
                       AppRichText(

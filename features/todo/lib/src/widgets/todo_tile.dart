@@ -1,15 +1,20 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:domain/models/src/todo.dart';
+import 'package:domain/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class TodoTile extends StatelessWidget {
   final Todo todo;
-  final Function(String id) onTap;
+  final Function(String id) onDismissed;
+  final Function({
+    required String id,
+    required bool status,
+  }) onTap;
 
   const TodoTile({
     required this.todo,
+    required this.onDismissed,
     required this.onTap,
   });
 
@@ -17,8 +22,12 @@ class TodoTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppColorsTheme colors = context.theme.colors;
 
-    return GestureDetector(
-      onTap: onTap(todo.id),
+    return Dismissible(
+      key: Key(todo.id),
+      direction: DismissDirection.endToStart,
+      onDismissed: (_) {
+        onDismissed(todo.id);
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: AppDimens.contentBigPaddingVertical,
@@ -40,21 +49,26 @@ class TodoTile extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: todo.isCompleted ? colors.successContent : colors.accent,
+            GestureDetector(
+              onTap: () {
+                onTap(id: todo.id, status: !todo.isCompleted);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: todo.isCompleted ? colors.successContent : colors.accent,
+                ),
+                padding: const EdgeInsets.all(AppDimens.iconExtraSmallPadding),
+                child: todo.isCompleted
+                    ? AppIcons.check(
+                        size: AppDimens.iconSizeExtraSmall,
+                        color: colors.buttonContent,
+                      )
+                    : const SizedBox(
+                        width: AppDimens.iconSizeExtraSmall,
+                        height: AppDimens.iconSizeExtraSmall,
+                      ),
               ),
-              padding: const EdgeInsets.all(AppDimens.iconExtraSmallPadding),
-              child: todo.isCompleted
-                  ? AppIcons.check(
-                      size: AppDimens.iconSizeExtraSmall,
-                      color: colors.buttonContent,
-                    )
-                  : const SizedBox(
-                      width: AppDimens.iconSizeExtraSmall,
-                      height: AppDimens.iconSizeExtraSmall,
-                    ),
             ),
           ],
         ),
