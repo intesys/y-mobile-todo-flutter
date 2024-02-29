@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ytodos/src/domain/models/todo_item_model.dart';
 import 'package:ytodos/src/navigation/router.dart';
 import 'package:ytodos/src/presentation/features/home/widgets/empty_todo_widget.dart';
+import 'package:ytodos/src/presentation/features/home/widgets/todoTileWidget.dart';
 import 'package:ytodos/src/presentation/provider/home_provider.dart';
 import 'package:ytodos/src/utils/app_colors.dart';
 import 'package:ytodos/src/utils/app_paddings.dart';
@@ -51,20 +52,33 @@ class HomeScreen extends StatelessWidget {
                   ];
 
                   if (completedTodoList.isNotEmpty || uncompletedTodoList.isNotEmpty) {
-                    return ListView.builder(
+                    return ListView.separated(
                       itemCount: combinedTodoList.length,
                       itemBuilder: (context, index) {
                         if (combinedTodoList[index].id == "") {
                           return TodoTitleWidget(title: 'completed'.tr());
                         }
                         return Dismissible(
-                            key: Key(combinedTodoList[index].id),
-                            direction: DismissDirection.endToStart,
-                            onDismissed: (direction) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('${combinedTodoList[index]} dismissed')));
+                          key: Key(combinedTodoList[index].id),
+                          direction: DismissDirection.endToStart,
+                          onDismissed: (direction) {
+                            ref.read(homeProvider.notifier).deleteTask(
+                                  combinedTodoList[index].id,
+                                  combinedTodoList[index].completed,
+                                );
+                          },
+                          child: TodoTileWidget(
+                            todoItem: combinedTodoList[index],
+                            onTap: () {
+                              ref
+                                  .read(homeProvider.notifier)
+                                  .changeTodoItemStatus(combinedTodoList[index]);
                             },
-                            child: ListTile(title: Text(combinedTodoList[index].text)));
+                          ),
+                        );
+                      },
+                      separatorBuilder: (_, __) {
+                        return const SizedBox(height: 16);
                       },
                     );
                   } else {

@@ -43,22 +43,29 @@ class TaskNotifier extends StateNotifier<TaskState> {
     bool isSuccess = await _deleteTodoItemUseCase.execute(id);
     if (isSuccess) {
       if (isCompleted) {
-        state.completedTodoList.removeWhere((element) => element.id ==id);
+        state.completedTodoList.removeWhere((element) => element.id == id);
       } else {
-        state.uncompletedTodoList.removeWhere((element) => element.id ==id);
+        state.uncompletedTodoList.removeWhere((element) => element.id == id);
       }
     }
   }
 
   Future<void> changeTodoItemStatus(TodoItemModel todoItem) async {
-    bool isSuccess = await _changeTodoItemStatusUseCase.execute(todoItem);
+    TodoItemModel newTodoItem = todoItem.copyWith(completed: !todoItem.completed);
+    bool isSuccess = await _changeTodoItemStatusUseCase.execute(newTodoItem);
     if (isSuccess) {
-      if (todoItem.completed) {
-        state.uncompletedTodoList.remove(todoItem);
-        state.completedTodoList.add(todoItem);
+      if (newTodoItem.completed) {
+        state = TaskState(
+          completedTodoList: [newTodoItem, ...state.completedTodoList],
+          uncompletedTodoList:
+              state.uncompletedTodoList.where((element) => element.id != todoItem.id).toList(),
+        );
       } else {
-        state.completedTodoList.remove(todoItem);
-        state.uncompletedTodoList.add(todoItem);
+        state = TaskState(
+          completedTodoList:
+              state.completedTodoList.where((element) => element.id != todoItem.id).toList(),
+          uncompletedTodoList: [newTodoItem, ...state.uncompletedTodoList],
+        );
       }
     }
   }

@@ -10,7 +10,6 @@ class TodoProviderImpl implements TodoProvider {
   Future<List<TodoItemEntity>> getTodoItems() async {
     final Uri url = Uri.http('www.allbrain.it', 'ytodo/api.php', {'user_id': '1'});
     final Response response = await http.get(url);
-    print(response.body);
     return (jsonDecode(response.body) as List)
         .map((todo) => TodoItemEntity.fromJson(todo))
         .toList();
@@ -31,8 +30,7 @@ class TodoProviderImpl implements TodoProvider {
   @override
   Future<bool> changeTodoItemStatus(TodoItemEntity todoItem) async {
     final Uri url = Uri.http('www.allbrain.it', 'ytodo/api.php', {'user_id': '1', 'id': todoItem.id});
-    final Response response = await http.patch(url);
-    print(response.body);
+    final Response response = await http.patch(url, body: jsonEncode({'completed': todoItem.completed}));
     return jsonDecode(response.body)['success'];
   }
 
@@ -40,7 +38,6 @@ class TodoProviderImpl implements TodoProvider {
   Future<bool> deleteTodoItem(String id) async {
     final Uri url = Uri.http('www.allbrain.it', 'ytodo/api.php', {'user_id': '1', 'id': id});
     final Response response = await http.delete(url);
-    print(response.body);
     return jsonDecode(response.body)['success'];
   }
 }
