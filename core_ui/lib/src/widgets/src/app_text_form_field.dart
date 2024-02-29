@@ -23,7 +23,7 @@ class AppTextFormField extends StatelessWidget {
     final AppColorsTheme colors = context.theme.colors;
 
     return TextFormField(
-      maxLines: obscureText ? 1 : 3,
+      maxLines: obscureText ? 1 : maxLines,
       minLines: 1,
       cursorColor: colors.primaryText,
       style: AppFonts.raleway16Regular.copyWith(color: colors.primaryText),
