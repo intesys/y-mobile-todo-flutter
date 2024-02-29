@@ -1,7 +1,7 @@
-name: domain
+name: data
+description: data module
 version: 0.0.1
 publish_to: none
-description: Project domain module
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -11,10 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  core:
-    path: ../core
-  core_ui:
-    path: ../core_ui
+  domain:
+    path: ../domain
+
+  http: ^1.2.1
 
   freezed: ^2.4.7
   freezed_annotation: ^2.2.0

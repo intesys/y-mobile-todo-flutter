@@ -1,6 +1,7 @@
 library core;
 
 export 'package:easy_localization/easy_localization.dart';
+export 'package:freezed_annotation/freezed_annotation.dart';
 
 export 'src/di/app_di.dart';
 

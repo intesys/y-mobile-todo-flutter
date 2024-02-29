@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';
@@ -17,6 +18,7 @@ void main() async {
   );
 
   navigationDI.setupDependencies();
+  await dataDI.initDependencies();
 
   runApp(const MyApp());
 }
