@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'todo.freezed.dart';
 part 'todo.g.dart';
