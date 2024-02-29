@@ -39,18 +39,33 @@ class HomeScreen extends StatelessWidget {
             Expanded(
               child: Consumer(
                 builder: (context, ref, _) {
-                  List<TodoItemModel> todoList = ref.watch(homeProvider).tasks;
-                  if (todoList.isNotEmpty) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(todoList.toString()),
-                        ElevatedButton(
-                            onPressed: () {
-                              ref.watch(homeProvider.notifier).createTask("aervaerv");
+                  List<TodoItemModel> completedTodoList = ref.watch(homeProvider).completedTodoList;
+
+                  List<TodoItemModel> uncompletedTodoList =
+                      ref.watch(homeProvider).uncompletedTodoList;
+
+                  List<TodoItemModel> combinedTodoList = [
+                    ...uncompletedTodoList,
+                    const TodoItemModel(id: "", text: "", completed: false),
+                    ...completedTodoList,
+                  ];
+
+                  if (completedTodoList.isNotEmpty || uncompletedTodoList.isNotEmpty) {
+                    return ListView.builder(
+                      itemCount: combinedTodoList.length,
+                      itemBuilder: (context, index) {
+                        if (combinedTodoList[index].id == "") {
+                          return TodoTitleWidget(title: 'completed'.tr());
+                        }
+                        return Dismissible(
+                            key: Key(combinedTodoList[index].id),
+                            direction: DismissDirection.endToStart,
+                            onDismissed: (direction) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('${combinedTodoList[index]} dismissed')));
                             },
-                            child: Text("aewrvae"))
-                      ],
+                            child: ListTile(title: Text(combinedTodoList[index].text)));
+                      },
                     );
                   } else {
                     return const EmptyTodoWidget();

@@ -9,7 +9,7 @@ class TodoItemEntity with _$TodoItemEntity {
   const factory TodoItemEntity({
     required String id,
     required String text,
-    required bool completed,
+    @Default(false) bool completed,
 }) = _TodoItemEntity;
   factory TodoItemEntity.fromJson(Map<String, dynamic> json) => _$TodoItemEntityFromJson(json);
 }

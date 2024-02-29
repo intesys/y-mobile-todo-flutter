@@ -33,7 +33,7 @@ class AppRouter {
                 path: _addTodoRoute,
                 name: addTodoScreenName,
                 builder: (BuildContext context, GoRouterState state) {
-                  return const AddTodoScreen();
+                  return AddTodoScreen();
                 },
               ),
             ],

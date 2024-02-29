@@ -5,7 +5,10 @@ import 'home_notifier.dart';
 import 'home_state.dart';
 
 final homeProvider = StateNotifierProvider<TaskNotifier, TaskState>(
-      (ref) => TaskNotifier(
-    todoListUseCase:  ref.read(getTodoListUseCaseProvider),
+  (ref) => TaskNotifier(
+    getTodoListUseCase: ref.read(getTodoListUseCaseProvider),
+    addTodoItemUseCase: ref.read(addTodoItemUseCaseProvider),
+    changeTodoItemStatusUseCase: ref.read(changeTodoItemStatusUseCaseProvider),
+    deleteTodoItemUseCase: ref.read(deleteTodoItemUseCaseProvider),
   ),
 );
