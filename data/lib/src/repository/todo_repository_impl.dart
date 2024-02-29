@@ -2,6 +2,8 @@ import 'package:domain/domain.dart';
 
 import '../entities/request_result/request_result_entity.dart';
 import '../entities/todo/todo_entity.dart';
+import '../mappers/action_result_mapper.dart';
+import '../mappers/todo_mapper.dart';
 import '../providers/todo_provider.dart';
 
 class TodoRepositoryImpl implements TodoRepository {
@@ -15,14 +17,14 @@ class TodoRepositoryImpl implements TodoRepository {
   Future<List<Todo>> getTodoList() async {
     final List<TodoEntity> list = await _todoProvider.getList();
 
-    return list.map((TodoEntity entity) => Todo.fromJson(entity.toJson())).toList();
+    return list.map(TodoMapper.fromEntity).toList();
   }
 
   @override
   Future<ActionResult> createTodo({required String text}) async {
     final RequestResultEntity result = await _todoProvider.create(text: text);
 
-    return ActionResult.fromJson(result.toJson());
+    return ActionResultMapper.fromEntity(result);
   }
 
   @override
@@ -35,7 +37,7 @@ class TodoRepositoryImpl implements TodoRepository {
       todoId: todoId,
     );
 
-    return ActionResult.fromJson(result.toJson());
+    return ActionResultMapper.fromEntity(result);
   }
 
   @override
@@ -44,6 +46,6 @@ class TodoRepositoryImpl implements TodoRepository {
       todoId: todoId,
     );
 
-    return ActionResult.fromJson(result.toJson());
+    return ActionResultMapper.fromEntity(result);
   }
 }
