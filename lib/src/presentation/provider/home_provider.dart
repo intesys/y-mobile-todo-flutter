@@ -4,8 +4,9 @@ import 'package:ytodos/src/domain/domain_module.dart';
 import 'home_notifier.dart';
 import 'home_state.dart';
 
-final homeProvider = StateNotifierProvider<TaskNotifier, TaskState>(
-  (ref) => TaskNotifier(
+final StateNotifierProvider<TaskNotifier, TaskState> homeProvider =
+    StateNotifierProvider<TaskNotifier, TaskState>(
+  (StateNotifierProviderRef<TaskNotifier, TaskState> ref) => TaskNotifier(
     getTodoListUseCase: ref.read(getTodoListUseCaseProvider),
     addTodoItemUseCase: ref.read(addTodoItemUseCaseProvider),
     changeTodoItemStatusUseCase: ref.read(changeTodoItemStatusUseCaseProvider),

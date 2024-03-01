@@ -5,8 +5,8 @@ import 'package:ytodos/src/navigation/router.dart';
 import 'package:ytodos/src/presentation/global_widgets/app_field_button.dart';
 import 'package:ytodos/src/presentation/global_widgets/app_text_field.dart';
 import 'package:ytodos/src/utils/app_colors.dart';
-import 'package:ytodos/src/utils/app_text_styles.dart';
 import 'package:ytodos/src/utils/app_paddings.dart';
+import 'package:ytodos/src/utils/app_text_styles.dart';
 
 import 'widgets/password_requirements_widget.dart';
 import 'widgets/verified_widget.dart';
@@ -15,22 +15,23 @@ class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
   static const String _participantId = '942863938';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: CustomScrollView(
-          slivers: [
+          slivers: <Widget>[
             SliverFillRemaining(
               hasScrollBody: false,
               child: Padding(
                 padding: AppPaddings.mainPadding,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
+                  children: <Widget>[
                     const SizedBox(height: 12),
                     Text(
                       'easy_trials'.tr(),
@@ -57,7 +58,7 @@ class AuthScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     PasswordRequirementsWidget(
-                      requirements: [
+                      requirements: <RequirementModel>[
                         RequirementModel(text: 'at_least_12_characters'.tr()),
                         RequirementModel(text: 'at_least_one_upper_and_lower_case'.tr()),
                         RequirementModel(text: 'at_least_one_special_character'.tr()),
@@ -120,7 +121,7 @@ class AuthScreen extends StatelessWidget {
             ),
           ],
         ),
-      )
+      ),
     );
   }
 }

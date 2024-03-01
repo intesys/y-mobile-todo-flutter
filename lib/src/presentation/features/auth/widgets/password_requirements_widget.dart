@@ -25,7 +25,7 @@ class PasswordRequirementsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Text(
           'password_must_contain'.tr(),
           style: AppTextStyles.s16w600,
@@ -34,10 +34,10 @@ class PasswordRequirementsWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 12),
           child: Column(
-            children: [
+            children: <Widget>[
               for (final RequirementModel requirement in requirements)
                 Row(
-                  children: [
+                  children: <Widget>[
                     Icon(
                       requirement.icon,
                       size: 8,

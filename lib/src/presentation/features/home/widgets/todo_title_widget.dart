@@ -15,7 +15,7 @@ class TodoTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
+      children: <Widget>[
         Text(
           title,
           style: AppTextStyles.s20w600,

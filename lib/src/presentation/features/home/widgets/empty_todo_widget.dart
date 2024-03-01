@@ -10,7 +10,7 @@ class EmptyTodoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: <Widget>[
         Image.asset(
           AppImages.emptyTodoIcon,
           width: 128,

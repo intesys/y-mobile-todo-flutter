@@ -11,24 +11,24 @@ class TodoRepositoryImpl implements TodoRepository {
 
   @override
   Future<List<TodoItemModel>> getTodoList() async {
-    List<TodoItemEntity> todoList = await _todoProvider.getTodoItems();
-    return todoList.map((todo) => TodoMapper.toModel(todo)).toList();
+    final List<TodoItemEntity> todoList = await _todoProvider.getTodoItems();
+    return todoList.map((TodoItemEntity todo) => TodoMapper.toModel(todo)).toList();
   }
 
   @override
   Future<String?> addTodoItems(String text) async {
-    return await _todoProvider.addTodoItem(text);
+    return _todoProvider.addTodoItem(text);
   }
 
   @override
   Future<bool> changeTodoItemStatus(TodoItemModel todoItem) async {
-    bool isSuccess = await _todoProvider.changeTodoItemStatus(TodoMapper.toEntity(todoItem));
+    final bool isSuccess = await _todoProvider.changeTodoItemStatus(TodoMapper.toEntity(todoItem));
     return isSuccess;
   }
 
   @override
   Future<bool> deleteTodoItem(String id) async {
-    bool isSuccess = await _todoProvider.deleteTodoItem(id);
+    final bool isSuccess = await _todoProvider.deleteTodoItem(id);
     return isSuccess;
   }
 }

@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -25,7 +24,7 @@ class AddTodoScreen extends StatelessWidget {
           padding: AppPaddings.mainPadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               GestureDetector(
                 onTap: () {
                   context.pop();
@@ -42,7 +41,7 @@ class AddTodoScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Consumer(
-                builder: (context, ref, _) {
+                builder: (BuildContext context, WidgetRef ref, _) {
                   return AppFieldButton(
                     onPressed: () {
                       if (_controller.text.isNotEmpty) {

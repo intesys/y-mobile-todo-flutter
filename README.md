@@ -1,16 +1,48 @@
-# ytodos
+# y-mobile-todo
 
-A new Flutter project.
+##  Build app
+prebuild: dart run build_runner build -d
+path: lib/main.dart
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## 1. GitFlow
+Branches: master, dev, feature/name-1, bugfix/name-2.
+Commit name structure: [name-1] Description
+Merge request should contain no more than 40 files
 
-A few resources to get you started if this is your first Flutter project:
+## 2. Architecture
+Clean Architecture + Riverpod
+Dependency Injection: Riverpod
+Domain layer: models, repositories, use-cases.
+Data layer: entities, mappers from entities to domain model, implementations of repositories and providers.
+Presentation layer: screens + riverpod
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 3. Supported flavors
+- Dev
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 4. Code Development Rules
+Lint rules described in analysis_options.yaml
+
+## 5. Asynchrony support
+Flutter Async
+
+## 6. Abstractions for data sources and data access
+Providers are responsible for specific services (e.g. http provider, local provider, etc.),
+they use data layer entities. Do not have abstract base classes.
+Repositories are responsible for gathering data from providers
+and mapping it to the corresponding domain layer models. Have abstract base classes in domain layer.
+
+## 7. App distributing
+none
+
+## 8. Approach for working with UI
+One file = one widget.
+
+## 9. Localization
+Localization is implemented using EasyLocalization service.
+
+## 10. Design system
+Fonts, colors, frequently used constant values.
+
+## 11. Supported platforms
+Ios, Android

@@ -1,16 +1,13 @@
 import 'package:ytodos/src/domain/repositories/todo_repository.dart';
 
-import 'add_todo_item_usecase.dart';
-
-class AddTodoItemUseCaseImpl implements AddTodoItemUseCase {
+class AddTodoItemUseCase {
   final TodoRepository _todoRepository;
 
-  const AddTodoItemUseCaseImpl({
+  const AddTodoItemUseCase({
     required TodoRepository todoRepository,
   }) : _todoRepository = todoRepository;
 
-  @override
   Future<String?> execute(String text) async {
-    return await _todoRepository.addTodoItems(text);
+    return _todoRepository.addTodoItems(text);
   }
 }

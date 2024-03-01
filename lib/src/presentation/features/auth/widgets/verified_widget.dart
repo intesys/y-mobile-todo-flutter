@@ -18,7 +18,6 @@ class VerifiedWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const Icon(

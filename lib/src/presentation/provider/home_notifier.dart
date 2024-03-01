@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ytodos/src/domain/models/todo_item_model.dart';
-import 'package:ytodos/src/domain/usecases/add_todo_item_usecase.dart';
-import 'package:ytodos/src/domain/usecases/change_todo_item_status_usecase.dart';
-import 'package:ytodos/src/domain/usecases/delete_todo_item_usecase.dart';
-import 'package:ytodos/src/domain/usecases/get_todo_list_usecase.dart';
+import 'package:ytodos/src/domain/usecases/add_todo_item_usecase_impl.dart';
+import 'package:ytodos/src/domain/usecases/change_todo_item_status_usecase_impl.dart';
+import 'package:ytodos/src/domain/usecases/delete_todo_item_usecase_impl.dart';
+import 'package:ytodos/src/domain/usecases/get_todo_list_usecase_impl.dart';
 
 import 'home_state.dart';
 
@@ -27,10 +27,10 @@ class TaskNotifier extends StateNotifier<TaskState> {
   }
 
   Future<void> addTodoItem(String text) async {
-    String? id = await _addTodoItemUseCase.execute(text);
+    final String? id = await _addTodoItemUseCase.execute(text);
     if (id != null) {
       state = TaskState(
-        uncompletedTodoList: [
+        uncompletedTodoList: <TodoItemModel>[
           TodoItemModel(id: id, text: text, completed: false),
           ...state.uncompletedTodoList,
         ],
@@ -40,40 +40,49 @@ class TaskNotifier extends StateNotifier<TaskState> {
   }
 
   Future<void> deleteTask(String id, bool isCompleted) async {
-    bool isSuccess = await _deleteTodoItemUseCase.execute(id);
+    final bool isSuccess = await _deleteTodoItemUseCase.execute(id);
     if (isSuccess) {
       if (isCompleted) {
-        state.completedTodoList.removeWhere((element) => element.id == id);
+        state = state.copyWith(
+          completedTodoList:
+              state.completedTodoList.where((TodoItemModel element) => element.id != id).toList(),
+        );
       } else {
-        state.uncompletedTodoList.removeWhere((element) => element.id == id);
+        state = state.copyWith(
+          uncompletedTodoList:
+              state.uncompletedTodoList.where((TodoItemModel element) => element.id != id).toList(),
+        );
       }
     }
   }
 
   Future<void> changeTodoItemStatus(TodoItemModel todoItem) async {
-    TodoItemModel newTodoItem = todoItem.copyWith(completed: !todoItem.completed);
-    bool isSuccess = await _changeTodoItemStatusUseCase.execute(newTodoItem);
+    final TodoItemModel newTodoItem = todoItem.copyWith(completed: !todoItem.completed);
+    final bool isSuccess = await _changeTodoItemStatusUseCase.execute(newTodoItem);
     if (isSuccess) {
       if (newTodoItem.completed) {
         state = TaskState(
-          completedTodoList: [newTodoItem, ...state.completedTodoList],
-          uncompletedTodoList:
-              state.uncompletedTodoList.where((element) => element.id != todoItem.id).toList(),
+          completedTodoList: <TodoItemModel>[newTodoItem, ...state.completedTodoList],
+          uncompletedTodoList: state.uncompletedTodoList
+              .where((TodoItemModel element) => element.id != todoItem.id)
+              .toList(),
         );
       } else {
         state = TaskState(
-          completedTodoList:
-              state.completedTodoList.where((element) => element.id != todoItem.id).toList(),
-          uncompletedTodoList: [newTodoItem, ...state.uncompletedTodoList],
+          completedTodoList: state.completedTodoList
+              .where((TodoItemModel element) => element.id != todoItem.id)
+              .toList(),
+          uncompletedTodoList: <TodoItemModel>[newTodoItem, ...state.uncompletedTodoList],
         );
       }
     }
   }
 
-  void getTodoList() async {
-    List<TodoItemModel> completedTodoList = [];
-    List<TodoItemModel> uncompletedTodoList = [];
-    List<TodoItemModel> todoItemList = await _todoListUseCase.execute();
+  Future<void> getTodoList() async {
+    state = state.copyWith(isLoading: true);
+    final List<TodoItemModel> completedTodoList = <TodoItemModel>[];
+    final List<TodoItemModel> uncompletedTodoList = <TodoItemModel>[];
+    final List<TodoItemModel> todoItemList = await _todoListUseCase.execute();
     for (final TodoItemModel todo in todoItemList) {
       if (todo.completed) {
         completedTodoList.add(todo);
@@ -81,8 +90,6 @@ class TaskNotifier extends StateNotifier<TaskState> {
         uncompletedTodoList.add(todo);
       }
     }
-    print(completedTodoList);
-    print(uncompletedTodoList);
     state = TaskState(
       completedTodoList: completedTodoList,
       uncompletedTodoList: uncompletedTodoList,

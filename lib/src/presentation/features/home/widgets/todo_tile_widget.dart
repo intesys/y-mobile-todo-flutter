@@ -26,7 +26,6 @@ class TodoTileWidget extends StatelessWidget {
           color: todoItem.completed ? AppColors.honeydew : AppColors.seashell,
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SvgPicture.asset(AppImages.todoIcon),
             const SizedBox(width: 16),

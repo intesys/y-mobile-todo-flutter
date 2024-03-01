@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:ytodos/src/domain/models/todo_item_model.dart';
 import 'package:ytodos/src/navigation/router.dart';
 import 'package:ytodos/src/presentation/features/home/widgets/empty_todo_widget.dart';
-import 'package:ytodos/src/presentation/features/home/widgets/todoTileWidget.dart';
+import 'package:ytodos/src/presentation/features/home/widgets/refresh_button_widget.dart';
+import 'package:ytodos/src/presentation/features/home/widgets/todo_tile_widget.dart';
 import 'package:ytodos/src/presentation/provider/home_provider.dart';
 import 'package:ytodos/src/utils/app_colors.dart';
 import 'package:ytodos/src/utils/app_paddings.dart';
@@ -32,36 +33,43 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: AppPaddings.mainPadding,
         child: Column(
-          children: [
+          children: <Widget>[
             TodoTitleWidget(
               title: 'todo'.tr(),
-              action: Container(),
+              action: const RefreshButtonWidget(),
             ),
             Expanded(
               child: Consumer(
-                builder: (context, ref, _) {
-                  List<TodoItemModel> completedTodoList = ref.watch(homeProvider).completedTodoList;
+                builder: (BuildContext context, WidgetRef ref, _) {
+                  final List<TodoItemModel> completedTodoList =
+                      ref.watch(homeProvider).completedTodoList;
 
-                  List<TodoItemModel> uncompletedTodoList =
+                  final List<TodoItemModel> uncompletedTodoList =
                       ref.watch(homeProvider).uncompletedTodoList;
 
-                  List<TodoItemModel> combinedTodoList = [
+                  final List<TodoItemModel> combinedTodoList = <TodoItemModel>[
                     ...uncompletedTodoList,
-                    const TodoItemModel(id: "", text: "", completed: false),
+                    const TodoItemModel(id: '', text: '', completed: false),
                     ...completedTodoList,
                   ];
-
+                  if (ref.watch(homeProvider).isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.cadmiumOrange,
+                      ),
+                    );
+                  }
                   if (completedTodoList.isNotEmpty || uncompletedTodoList.isNotEmpty) {
                     return ListView.separated(
                       itemCount: combinedTodoList.length,
-                      itemBuilder: (context, index) {
-                        if (combinedTodoList[index].id == "") {
+                      itemBuilder: (BuildContext context, int index) {
+                        if (combinedTodoList[index].id == '') {
                           return TodoTitleWidget(title: 'completed'.tr());
                         }
                         return Dismissible(
                           key: Key(combinedTodoList[index].id),
                           direction: DismissDirection.endToStart,
-                          onDismissed: (direction) {
+                          onDismissed: (DismissDirection direction) {
                             ref.read(homeProvider.notifier).deleteTask(
                                   combinedTodoList[index].id,
                                   combinedTodoList[index].completed,
