@@ -9,10 +9,14 @@ class AppDimens {
   static const double appBigPagesPadding = 36.0;
   static const double floatingButtonAppPadding = 100.0;
 
-  static const double contentBigPaddingVertical = 16.0;
-  static const double contentBigPaddingHorizontal = 16.0;
-  static const double contentPaddingVertical = 12.0;
-  static const double contentPaddingHorizontal = 12.0;
+  static const double defaultSpacer = 8.0;
+  static const double mediumSmallSpacer = 12.0;
+  static const double doubleDefaultSpacer = 16.0;
+  static const double mediumSpacer = 24.0;
+  static const double bigSpacer = 36.0;
+
+  static const double contentBigPadding = 16.0;
+  static const double contentPadding = 12.0;
 
   static const double iconExtraSmallPadding = 6.0;
   static const double iconSmallPadding = 8.0;

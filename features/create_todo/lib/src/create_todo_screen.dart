@@ -63,7 +63,7 @@ class CreateTodoScreen extends StatelessWidget {
                     hintText: LocaleKeys.createTodo_hintText.tr(),
                     inputFormatters: <TextInputFormatter>[
                       // CustomTextFieldFormatter(),
-                      LengthLimitingTextInputFormatter(100),
+                      LengthLimitingTextInputFormatter(20),
                     ],
                   ),
                   AppButton(

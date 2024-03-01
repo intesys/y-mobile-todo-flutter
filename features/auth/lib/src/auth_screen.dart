@@ -28,7 +28,7 @@ class AuthScreen extends StatelessWidget {
                           color: colors.title,
                         ),
                       ),
-                      const SizedBox(height: 36),
+                      const SizedBox(height: AppDimens.bigSpacer),
                       Text(
                         LocaleKeys.auth_participationID.tr(),
                         style: AppFonts.raleway24SemiBold,
@@ -39,11 +39,11 @@ class AuthScreen extends StatelessWidget {
                           color: colors.title,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppDimens.doubleDefaultSpacer),
                       SuccessMessage(
                         message: LocaleKeys.auth_phoneNumberVerified.tr(),
                       ),
-                      const SizedBox(height: 36),
+                      const SizedBox(height: AppDimens.bigSpacer),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Column(
@@ -55,30 +55,30 @@ class AuthScreen extends StatelessWidget {
                                 color: colors.title,
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: AppDimens.doubleDefaultSpacer),
                             const Padding(
-                              padding: EdgeInsets.only(left: 12),
+                              padding: EdgeInsets.only(left: AppDimens.mediumSmallSpacer),
                               child: PasswordRules(),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 36),
+                      const SizedBox(height: AppDimens.bigSpacer),
                       AppTextFormField(
                         hintText: LocaleKeys.auth_enterPasswordHint.tr(),
                         obscureText: true,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppDimens.doubleDefaultSpacer),
                       AppTextFormField(
                         hintText: LocaleKeys.auth_confirmPasswordHint.tr(),
                         obscureText: true,
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: AppDimens.mediumSpacer),
                       AppButton(
                         title: LocaleKeys.auth_continueButton.tr(),
                         onTap: AppNavigator.pushToTodoScreen,
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: AppDimens.mediumSpacer),
                       AppRichText(
                         text: LocaleKeys.auth_changeParticipationID_text.tr(),
                         tapText: LocaleKeys.auth_changeParticipationID_tapText.tr(),

@@ -48,10 +48,7 @@ InputDecorationTheme _getInputDecorationTheme(AppColorsTheme colors) {
     fillColor: colors.textInputBackground,
     focusColor: colors.textInputBackground,
     filled: true,
-    contentPadding: const EdgeInsets.symmetric(
-      vertical: AppDimens.contentPaddingVertical,
-      horizontal: AppDimens.contentPaddingHorizontal,
-    ),
+    contentPadding: const EdgeInsets.all(AppDimens.contentPadding),
     hintStyle: AppFonts.raleway16Regular.copyWith(
       color: colors.hintText,
     ),

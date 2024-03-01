@@ -3,8 +3,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 class EmptyState extends StatelessWidget {
-  final int listLength = 7;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,7 +12,7 @@ class EmptyState extends StatelessWidget {
         Center(
           child: AppImages.emptyTodoList(width: AppDimens.imageSize),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: AppDimens.mediumSpacer),
         Text(
           LocaleKeys.todo_noData.tr(),
           style: AppFonts.raleway24SemiBold,

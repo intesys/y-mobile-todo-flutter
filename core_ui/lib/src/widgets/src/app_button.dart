@@ -31,10 +31,7 @@ class AppButton extends StatelessWidget {
         onTap: isLocked ? null : onTap,
         borderRadius: BorderRadius.circular(AppDimens.appBorderRadius),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppDimens.contentPaddingHorizontal,
-            vertical: AppDimens.contentPaddingVertical,
-          ),
+          padding: const EdgeInsets.all(AppDimens.contentPadding),
           child: Text(
             title,
             textAlign: TextAlign.center,

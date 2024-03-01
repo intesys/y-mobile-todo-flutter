@@ -14,10 +14,7 @@ class SuccessMessage extends StatelessWidget {
     final AppColorsTheme colors = context.theme.colors;
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: AppDimens.contentPaddingVertical,
-        horizontal: AppDimens.contentPaddingHorizontal,
-      ),
+      padding: const EdgeInsets.all(AppDimens.contentPadding),
       decoration: BoxDecoration(
         color: colors.successBackground,
         borderRadius: BorderRadius.circular(AppDimens.appBorderRadius),

@@ -30,8 +30,8 @@ class TodoTile extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(
-          vertical: AppDimens.contentBigPaddingVertical,
-          horizontal: AppDimens.contentBigPaddingVertical,
+          vertical: AppDimens.contentBigPadding,
+          horizontal: AppDimens.contentBigPadding,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimens.appBorderSmallRadius),
@@ -41,14 +41,14 @@ class TodoTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AppIcons.todoIcon(size: AppDimens.iconSizeMedium),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppDimens.doubleDefaultSpacer),
             Expanded(
               child: Text(
                 todo.text,
                 style: AppFonts.raleway14Regular,
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppDimens.doubleDefaultSpacer),
             GestureDetector(
               onTap: () {
                 onTap(id: todo.id, status: !todo.isCompleted);

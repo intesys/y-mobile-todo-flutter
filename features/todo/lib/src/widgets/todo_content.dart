@@ -39,7 +39,7 @@ class TodoContent extends StatelessWidget {
                   onTap: onTap,
                 );
               },
-              separatorBuilder: (_, __) => const SizedBox(height: 8),
+              separatorBuilder: (_, __) => const SizedBox(height: AppDimens.defaultSpacer),
             ),
           ),
         },
@@ -47,7 +47,7 @@ class TodoContent extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: AppDimens.appBigPagesPadding,
-              vertical: AppDimens.contentPaddingVertical,
+              vertical: AppDimens.contentPadding,
             ),
             child: Text(LocaleKeys.todo_completedList.tr(), style: AppFonts.raleway24SemiBold),
           ),
@@ -70,7 +70,7 @@ class TodoContent extends StatelessWidget {
                   ),
                 );
               },
-              separatorBuilder: (_, __) => const SizedBox(height: 8),
+              separatorBuilder: (_, __) => const SizedBox(height: AppDimens.defaultSpacer),
             ),
           ),
         },
