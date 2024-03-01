@@ -14,6 +14,20 @@ class TodoState extends Equatable {
     this.successMessage,
   });
 
+  TodoState copyWith({
+    List<Todo>? uncompletedTodos,
+    List<Todo>? completedTodos,
+    String? errorMessage,
+    String? successMessage,
+  }) {
+    return TodoState(
+      uncompletedTodos: uncompletedTodos ?? this.uncompletedTodos,
+      completedTodos: completedTodos ?? this.completedTodos,
+      errorMessage: errorMessage,
+      successMessage: successMessage,
+    );
+  }
+
   @override
   List<Object?> get props => <Object?>[
         uncompletedTodos,

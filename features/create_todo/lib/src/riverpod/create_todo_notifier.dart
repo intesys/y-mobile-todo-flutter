@@ -16,18 +16,20 @@ class CreateTodoNotifier extends StateNotifier<CreateTodoState> {
     try {
       final ActionResult result = await _createTodoUseCase.execute(text);
 
-      if (result.success) {
-        state = CreateTodoState(
+      if (result.success && result.id != null) {
+        state = state.copyWith(
           successMessage: result.message,
         );
-        AppNavigator.pop();
+        AppNavigator.pop(
+          Todo(id: result.id!, text: text, isCompleted: false),
+        );
       } else {
-        state = CreateTodoState(
+        state = state.copyWith(
           errorMessage: result.message,
         );
       }
     } catch (error) {
-      state = CreateTodoState(
+      state = state.copyWith(
         errorMessage: error.toString(),
       );
     }

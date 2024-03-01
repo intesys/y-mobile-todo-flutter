@@ -34,19 +34,19 @@ class AppNavigator {
     ],
   );
 
-  static void pop([dynamic value]) {
-    _router.pop(value);
+  static void pop<T>([T? value]) {
+    _router.pop<T>(value);
   }
 
-  static void pushToTodoScreen() {
-    _router.push(_todoPath);
+  static Future<T?> pushToTodoScreen<T>() async {
+    return _router.push<T?>(_todoPath);
   }
 
-  static void pushToAuthScreen() {
-    _router.push(_authPath);
+  static Future<T?> pushToAuthScreen<T>() async {
+    return _router.push<T?>(_authPath);
   }
 
-  static Future<void> pushToCreateTodoScreen() async {
-    await _router.push(_createTodoPath);
+  static Future<T?> pushToCreateTodoScreen<T>() async {
+    return _router.push<T?>(_createTodoPath);
   }
 }

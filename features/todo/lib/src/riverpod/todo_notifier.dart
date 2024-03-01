@@ -24,12 +24,12 @@ class TodoNotifier extends StateNotifier<TodoState> {
     try {
       final List<Todo> commonList = await _getTodoListUseCase.execute();
 
-      state = TodoState(
+      state = state.copyWith(
         completedTodos: commonList.where((Todo item) => item.isCompleted).toList(),
         uncompletedTodos: commonList.where((Todo item) => !item.isCompleted).toList(),
       );
     } catch (error) {
-      state = TodoState(
+      state = state.copyWith(
         errorMessage: error.toString(),
       );
     }
@@ -67,18 +67,18 @@ class TodoNotifier extends StateNotifier<TodoState> {
           );
         }
 
-        state = TodoState(
+        state = state.copyWith(
           completedTodos: newCompletedList,
           uncompletedTodos: newUncompletedList,
           successMessage: result.message,
         );
       } else {
-        state = TodoState(
+        state = state.copyWith(
           errorMessage: result.message,
         );
       }
     } catch (error) {
-      state = TodoState(
+      state = state.copyWith(
         errorMessage: error.toString(),
       );
     }
@@ -94,25 +94,32 @@ class TodoNotifier extends StateNotifier<TodoState> {
         final List<Todo> newUncompletedList = <Todo>[...state.uncompletedTodos]
           ..removeWhere((Todo item) => item.id == id);
 
-        state = TodoState(
+        state = state.copyWith(
           completedTodos: newCompletedList,
           uncompletedTodos: newUncompletedList,
           successMessage: actionResult.message,
         );
       } else {
-        state = TodoState(
+        state = state.copyWith(
           errorMessage: actionResult.message,
         );
       }
     } catch (error) {
-      state = TodoState(
+      state = state.copyWith(
         errorMessage: error.toString(),
       );
     }
   }
 
   Future<void> openCreateTodoScreen() async {
-    await AppNavigator.pushToCreateTodoScreen();
-    await getTodoLists();
+    final Todo? newTodo = await AppNavigator.pushToCreateTodoScreen<Todo?>();
+
+    if (newTodo != null) {
+      final List<Todo> newList = <Todo>[...state.uncompletedTodos, newTodo];
+
+      state = state.copyWith(
+        uncompletedTodos: newList,
+      );
+    }
   }
 }
