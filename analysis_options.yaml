@@ -4,6 +4,7 @@ analyzer:
   plugins:
     - dart_code_metrics
   exclude:
+    - "**/generated"
     - "**/*.g.dart"
     - "**/*.gr.dart"
     - "**/*.graphql.dart"
@@ -135,7 +136,7 @@ linter:
     avoid_js_rounded_ints: true
     avoid_multiple_declarations_per_line: true
     avoid_null_checks_in_equality_operators: true
-    avoid_positional_boolean_parameters: true
+    avoid_positional_boolean_parameters: false
     avoid_private_typedef_functions: true
     avoid_redundant_argument_values: true
     avoid_renaming_method_parameters: true
@@ -166,7 +167,7 @@ linter:
     eol_at_end_of_file: false
     exhaustive_cases: true
     file_names: true
-    flutter_style_todos: false
+    flutter_style_todos: true
     implementation_imports: false
     join_return_with_assignment: true
     leading_newlines_in_multiline_strings: true
