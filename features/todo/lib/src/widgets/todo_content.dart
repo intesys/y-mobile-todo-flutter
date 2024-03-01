@@ -29,7 +29,6 @@ class TodoContent extends StatelessWidget {
         if (uncompletedTodos.isNotEmpty) ...<Widget>{
           Expanded(
             child: ListView.separated(
-              reverse: true,
               padding: const EdgeInsets.symmetric(horizontal: AppDimens.appBigPagesPadding),
               itemCount: uncompletedTodos.length,
               itemBuilder: (BuildContext context, int index) {
@@ -54,7 +53,6 @@ class TodoContent extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: AppDimens.appBigPagesPadding),
-              shrinkWrap: true,
               itemCount: completedTodos.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(

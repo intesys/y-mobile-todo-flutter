@@ -41,6 +41,7 @@ class TodoScreen extends StatelessWidget {
             final List<Todo> uncompletedTodos = ref.watch(todoProvider).uncompletedTodos;
             final String? successMessage = ref.watch(todoProvider).successMessage;
             final String? errorMessage = ref.watch(todoProvider).errorMessage;
+            final bool isLoading = ref.watch(todoProvider).isLoading;
 
             if (successMessage != null) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -70,6 +71,15 @@ class TodoScreen extends StatelessWidget {
                   ),
                 );
               });
+            }
+
+            if (isLoading) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: AppDimens.floatingButtonAppPadding),
+                child: CircularProgressIndicator(color: context.theme.colors.accent),
+              ),
+            );
             }
 
             if (completedTodos.isEmpty && uncompletedTodos.isEmpty) {

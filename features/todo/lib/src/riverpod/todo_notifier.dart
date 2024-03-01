@@ -22,14 +22,17 @@ class TodoNotifier extends StateNotifier<TodoState> {
 
   Future<void> getTodoLists() async {
     try {
+      state = state.copyWith(isLoading: true);
       final List<Todo> commonList = await _getTodoListUseCase.execute();
 
       state = state.copyWith(
-        completedTodos: commonList.where((Todo item) => item.isCompleted).toList(),
-        uncompletedTodos: commonList.where((Todo item) => !item.isCompleted).toList(),
+        isLoading: false,
+        completedTodos: commonList.where((Todo item) => item.isCompleted).toList()..reversed,
+        uncompletedTodos: commonList.where((Todo item) => !item.isCompleted).toList()..reversed,
       );
     } catch (error) {
       state = state.copyWith(
+        isLoading: false,
         errorMessage: error.toString(),
       );
     }
@@ -50,7 +53,8 @@ class TodoNotifier extends StateNotifier<TodoState> {
         if (status) {
           newCompletedList = <Todo>[...state.completedTodos];
           final Todo todo = state.uncompletedTodos.firstWhere((Todo item) => item.id == id);
-          newCompletedList.add(
+          newCompletedList.insert(
+            0,
             Todo(id: todo.id, text: todo.text, isCompleted: !todo.isCompleted),
           );
 
@@ -62,7 +66,8 @@ class TodoNotifier extends StateNotifier<TodoState> {
 
           newUncompletedList = <Todo>[...state.uncompletedTodos];
           final Todo todo = state.completedTodos.firstWhere((Todo item) => item.id == id);
-          newUncompletedList.add(
+          newUncompletedList.insert(
+            0,
             Todo(id: todo.id, text: todo.text, isCompleted: !todo.isCompleted),
           );
         }
@@ -115,7 +120,7 @@ class TodoNotifier extends StateNotifier<TodoState> {
     final Todo? newTodo = await AppNavigator.pushToCreateTodoScreen<Todo?>();
 
     if (newTodo != null) {
-      final List<Todo> newList = <Todo>[...state.uncompletedTodos, newTodo];
+      final List<Todo> newList = <Todo>[newTodo, ...state.uncompletedTodos];
 
       state = state.copyWith(
         uncompletedTodos: newList,

@@ -6,12 +6,14 @@ class TodoState extends Equatable {
   final List<Todo> completedTodos;
   final String? errorMessage;
   final String? successMessage;
+  final bool isLoading;
 
   const TodoState({
     this.uncompletedTodos = const <Todo>[],
     this.completedTodos = const <Todo>[],
     this.errorMessage,
     this.successMessage,
+    this.isLoading = false,
   });
 
   TodoState copyWith({
@@ -19,12 +21,14 @@ class TodoState extends Equatable {
     List<Todo>? completedTodos,
     String? errorMessage,
     String? successMessage,
+    bool? isLoading,
   }) {
     return TodoState(
       uncompletedTodos: uncompletedTodos ?? this.uncompletedTodos,
       completedTodos: completedTodos ?? this.completedTodos,
       errorMessage: errorMessage,
       successMessage: successMessage,
+      isLoading: isLoading ?? this.isLoading,
     );
   }
 
