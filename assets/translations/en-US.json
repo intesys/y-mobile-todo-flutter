@@ -1,0 +1,22 @@
+{
+  "easy_trials": "EasyTrials",
+  "your_participant_id": "Your Participant ID",
+  "your_phone_number_is_verified": "Your phone number is verified!",
+  "create_a_password": "Create a password",
+  "password_must_contain": "Password must contain :",
+  "at_least_12_characters": "At least 12 characters",
+  "at_least_one_upper_and_lower_case": "At least one upper and lower case",
+  "at_least_one_special_character": "At least one special character",
+  "enter_password": "Enter password",
+  "confirm_password": "Confirm password",
+  "continue": "Continue",
+  "use_different": "Use different",
+  "participant_id": "Participant ID",
+  "by_clicking_continue": "By clicking continue, you agree to the",
+  "end_user_license_agreement": "End user licence agreement",
+  "todo": "Todo",
+  "completed": "Completed",
+  "no_todos": "No TODOs yet!",
+  "add_your_todo": "Add your todo here...",
+  "save": "Save"
+}
