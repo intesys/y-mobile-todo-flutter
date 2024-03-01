@@ -24,32 +24,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: EasyLocalization(
-        supportedLocales: AppLocalization.supportedLocales,
-        path: AppLocalization.langsFolderPath,
-        fallbackLocale: AppLocalization.fallbackLocale,
-        child: Builder(
-          builder: (BuildContext context) {
-            return MaterialApp.router(
-              theme: lightTheme,
-              darkTheme: darkTheme,
-              routerConfig: AppNavigator.appRouter,
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              builder: (BuildContext context, Widget? child) {
-                return MediaQuery(
-                  data: MediaQuery.of(context).copyWith(
-                    textScaler: TextScaler.noScaling,
-                  ),
-                  child: child ?? const SizedBox(),
-                );
-              },
-            );
-          },
-        ),
+    return EasyLocalization(
+      supportedLocales: AppLocalization.supportedLocales,
+      path: AppLocalization.langsFolderPath,
+      fallbackLocale: AppLocalization.fallbackLocale,
+      child: Builder(
+        builder: (BuildContext context) {
+          return MaterialApp.router(
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            routerConfig: AppNavigator.appRouter,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            builder: (BuildContext context, Widget? child) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: TextScaler.noScaling,
+                ),
+                child: child ?? const SizedBox(),
+              );
+            },
+          );
+        },
       ),
     );
   }

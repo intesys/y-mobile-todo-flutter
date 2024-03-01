@@ -13,25 +13,27 @@ class CreateTodoNotifier extends StateNotifier<CreateTodoState> {
         super(const CreateTodoState());
 
   Future<void> createTodo(String text) async {
-    try {
-      final ActionResult result = await _createTodoUseCase.execute(text);
+    if (text.isNotEmpty) {
+      try {
+        final ActionResult result = await _createTodoUseCase.execute(text);
 
-      if (result.success && result.id != null) {
+        if (result.success && result.id != null) {
+          state = state.copyWith(
+            successMessage: result.message,
+          );
+          AppNavigator.pop(
+            Todo(id: result.id!, text: text, isCompleted: false),
+          );
+        } else {
+          state = state.copyWith(
+            errorMessage: result.message,
+          );
+        }
+      } catch (error) {
         state = state.copyWith(
-          successMessage: result.message,
-        );
-        AppNavigator.pop(
-          Todo(id: result.id!, text: text, isCompleted: false),
-        );
-      } else {
-        state = state.copyWith(
-          errorMessage: result.message,
+          errorMessage: error.toString(),
         );
       }
-    } catch (error) {
-      state = state.copyWith(
-        errorMessage: error.toString(),
-      );
     }
   }
 }

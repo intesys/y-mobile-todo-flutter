@@ -29,8 +29,8 @@ class TodoContent extends StatelessWidget {
         if (uncompletedTodos.isNotEmpty) ...<Widget>{
           Expanded(
             child: ListView.separated(
+              reverse: true,
               padding: const EdgeInsets.symmetric(horizontal: AppDimens.appBigPagesPadding),
-              shrinkWrap: true,
               itemCount: uncompletedTodos.length,
               itemBuilder: (BuildContext context, int index) {
                 return TodoTile(
